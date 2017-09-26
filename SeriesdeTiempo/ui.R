@@ -15,19 +15,22 @@ shinyUI(fluidPage(
   # Sidebar with a slider input for number of bins
   sidebarLayout(
     sidebarPanel(
-       fileInput("archivo", label = h3("File input"))
+       fileInput("archivo", label = h3("File input")), 
+       radioButtons("radio", label = h3("Radio buttons"), 
+                    choices = list("Plot" = 1, "Decompose" = 2, "acf" = 3), 
+                                                                    selected = 1)
     ),
 
     # Show a plot of the generated distribution
     mainPanel(
       
       tableOutput("contents"), 
-      plotOutput("distPlot"), plotOutput("distPlot2" ), plotOutput("acf")
+      plotOutput("distPlot")
       
     )
-  ),
+  )
   
-  actionButton("action", label = "Action")
+  #  , actionButton("action", label = "Action")
   
   
 ))
