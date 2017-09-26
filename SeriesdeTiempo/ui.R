@@ -20,6 +20,8 @@ shinyUI(fluidPage(
 
     # Show a plot of the generated distribution
     mainPanel(
+      
+      tableOutput("contents"), 
       plotOutput("distPlot"), plotOutput("distPlot2" ), plotOutput("acf")
       
     )

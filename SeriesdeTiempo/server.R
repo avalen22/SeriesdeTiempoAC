@@ -11,28 +11,44 @@ shinyServer(function(input, output) {
 
 #RECIBIR EL ARCHIVO 
   
-  read_data <- reactive({
+  archivo_in <- reactive({
     
     
-    if(is.null(input$archivo)){
+    if(is.null(input$archivo))
       
-      return()
+      return(NULL)
       
-    }else{
-      
-      archivo<- input$archivo
-      read.table(file=archivo$datapath, header=TRUE, sep=",", dec="." )
-      
-    }
+    archivo<- input$archivo
+    read.table(file=archivo$datapath, header=FALSE, sep=",", dec="." )
     
   })
 
-
   
+  output$contents <- renderTable({
+
+    
+    req(input$archivo)
+    
+    datos <- archivo_in()
+    
+  })
+  
+  
+  
+  
+  
+  
+#PINTAR DATOS INICIALMENTE
    output$distPlot <- renderPlot({
      
+     if(is.null(archivo_in()))
+        {
+          return(NULL)   
+     }else{
+       
+     
     births <- scan("http://robjhyndman.com/tsdldata/data/nybirths.dat")
-     birthstimeseries <- ts(births, frequency=12, start=c(1946,1))
+     birthstimeseries <- ts(archivo_in(), frequency=12, start=c(1946,1))
     plot(birthstimeseries)
     #kings <- scan("http://robjhyndman.com/tsdldata/misc/kings.dat",skip=3)
     #kingstimeseries <- ts(kings)
@@ -44,7 +60,7 @@ shinyServer(function(input, output) {
     
     # draw the histogram with the specified number of bins
     # hist(x, breaks = bins, col = 'darkgray', border = 'white')
-
+     }
   })
 
   
