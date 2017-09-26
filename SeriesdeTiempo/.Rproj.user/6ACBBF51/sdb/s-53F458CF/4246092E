@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "\n# This is the server logic for a Shiny web application.\n# You can find out more about building applications with Shiny here:\n#\n# http://shiny.rstudio.com\n#\n\nlibrary(shiny)\n\nshinyServer(function(input, output) {\n\n#RECIBIR EL ARCHIVO \n  \n  read_data <- reactive({\n    \n    \n    if(is.null(input$archivo)){\n      \n      return()\n      \n    }else{\n      \n      archivo<- input$archivo\n      read.table(file=archivo$datapath, header=TRUE, sep=\",\", dec=\".\" )\n      \n    }\n    \n  })\n\n\n  \n   output$distPlot <- renderPlot({\n     \n    births <- scan(\"http://robjhyndman.com/tsdldata/data/nybirths.dat\")\n     birthstimeseries <- ts(births, frequency=12, start=c(1946,1))\n    plot(birthstimeseries)\n    #kings <- scan(\"http://robjhyndman.com/tsdldata/misc/kings.dat\",skip=3)\n    #kingstimeseries <- ts(kings)\n    #plot(kingstimeseries)\n    \n    # generate bins based on input$bins from ui.R\n    # x    <- faithful[, 2]\n    # bins <- seq(min(x), max(x), length.out = input$bins + 1)\n    \n    # draw the histogram with the specified number of bins\n    # hist(x, breaks = bins, col = 'darkgray', border = 'white')\n\n  })\n\n  \n  output$distPlot2 <- renderPlot({\n   \n    if(input$action==TRUE){\n    \n      births <- scan(\"http://robjhyndman.com/tsdldata/data/nybirths.dat\")\n      birthstimeseries <- ts(births, frequency=12, start=c(1946,1))\n      plot(birthstimeseries)\n      birthtimeseriescomponets <- decompose(birthstimeseries)\n      plot(birthtimeseriescomponets)\n      \n    }\n    \n  })\n  \n  output$acf <- renderPlot({\n    \n    if(input$action==TRUE){\n      \n      input$action== FALSE\n      births <- scan(\"http://robjhyndman.com/tsdldata/data/nybirths.dat\")\n      birthstimeseries <- ts(births, frequency=12, start=c(1946,1))\n      acf(birthstimeseries)\n      \n    }\n    \n  })\n  \n  \n\n})\n",
+    "created" : 1506284689266.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3890698034",
+    "id" : "4246092E",
+    "lastKnownWriteTime" : 1506384478,
+    "last_content_update" : 1506384478643,
+    "path" : "~/GitHub/SeriesdeTiempo/SeriesdeTiempo/server.R",
+    "project_path" : "server.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
