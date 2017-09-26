@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "\n# This is the server logic for a Shiny web application.\n# You can find out more about building applications with Shiny here:\n#\n# http://shiny.rstudio.com\n#\n\nlibrary(shiny)\n\nshinyServer(function(input, output) {\n\n#RECIBIR EL ARCHIVO \n  \n  archivo_in <- reactive({\n     if(is.null(input$archivo))\n      \n      return(NULL)\n      \n    archivo<- input$archivo\n    read.table(file=archivo$datapath, header=FALSE, sep=\",\", dec=\".\" )\n    \n  })\n\n  \n  output$contents <- renderTable({\n  \n    req(input$archivo)\n    datos <- archivo_in()\n    head(datos)\n  })\n  \n  output$summary <- renderPrint({\n    \n    if(is.null(archivo_in()))\n    {\n      return(NULL)   \n    }else{\n      \n      datosTS <- ts(archivo_in(), frequency=12, start=c(1946,1))\n    }\n    \n    \n    \n    #datos <- archivo_in()\n    summary(datosTS)\n  })\n  \n  \n  \n  \n#PINTAR DATOS INICIALMENTE\n \n  \n   output$distPlot <- renderPlot({\n     \n     \n     if(is.null(archivo_in()))\n     {\n       return(NULL)   \n     }else{\n       \n       datosTS <- ts(archivo_in(), frequency=12, start=c(1946,1))\n      }\n      if(input$radio==1){\n       plot(datosTS)\n     }else{\n       if(input$radio==2){\n         #births <- scan(\"http://robjhyndman.com/tsdldata/data/nybirths.dat\")\n         #birthstimeseries <- ts(births, frequency=12, start=c(1946,1))\n         #plot(birthstimeseries)\n         datosTSdecomp <- decompose(datosTS)\n         plot(datosTSdecomp)\n       \n       }else{\n         if(input$radio==3){\n           acf(datosTS)\n          }else{\n           if(input$radio==4){\n            pacf(datosTS)\n           }\n         }\n       }\n     }   \n  })\n  \n  \n   \n \n  \n  \n\n})\n",
+    "created" : 1506388771005.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4044252816",
+    "id" : "28E6BDCC",
+    "lastKnownWriteTime" : 1506467302,
+    "last_content_update" : 1506467302166,
+    "path" : "~/GitHub/SeriesdeTiempo/SeriesdeTiempo/server.R",
+    "project_path" : "server.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

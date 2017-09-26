@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "\n\nshinyApp(\n  ui = tagList(\n    shinythemes::themeSelector(),\n    navbarPage(\n      # theme = \"cerulean\",  # <--- To use a theme, uncomment this\n      \"shinythemes\",\n      tabPanel(\"Navbar 1\",\n               sidebarPanel(\n                 fileInput(\"file\", \"File input:\"),\n                 textInput(\"txt\", \"Text input:\", \"general\"),\n                 sliderInput(\"slider\", \"Slider input:\", 1, 100, 30),\n                 tags$h5(\"Deafult actionButton:\"),\n                 actionButton(\"action\", \"Search\"),\n                 \n                 tags$h5(\"actionButton with CSS class:\"),\n                 actionButton(\"action2\", \"Action button\", class = \"btn-primary\")\n               ),\n               mainPanel(\n                 tabsetPanel(\n                   tabPanel(\"Tab 1\",\n                            h4(\"Table\"),\n                            tableOutput(\"table\"),\n                            h4(\"Verbatim text output\"),\n                            verbatimTextOutput(\"txtout\"),\n                            h1(\"Header 1\"),\n                            h2(\"Header 2\"),\n                            h3(\"Header 3\"),\n                            h4(\"Header 4\"),\n                            h5(\"Header 5\")\n                   ),\n                   tabPanel(\"Tab 2\", \"This panel is intentionally left blank\"),\n                   tabPanel(\"Tab 3\", \"This panel is intentionally left blank\")\n                 )\n               )\n      ),\n      tabPanel(\"Navbar 2\", \"This panel is intentionally left blank\"),\n      tabPanel(\"Navbar 3\", \"This panel is intentionally left blank\")\n    )\n  ),\n  server = function(input, output) {\n    output$txtout <- renderText({\n      paste(input$txt, input$slider, format(input$date), sep = \", \")\n    })\n    output$table <- renderTable({\n      head(cars, 4)\n    })\n  }\n)\n\n",
+    "created" : 1506445538026.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "2164528639",
+    "id" : "AA8234AE",
+    "lastKnownWriteTime" : 1506444734,
+    "last_content_update" : 1506445548137,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

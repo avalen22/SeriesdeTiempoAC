@@ -12,9 +12,7 @@ shinyServer(function(input, output) {
 #RECIBIR EL ARCHIVO 
   
   archivo_in <- reactive({
-    
-    
-    if(is.null(input$archivo))
+     if(is.null(input$archivo))
       
       return(NULL)
       
@@ -25,15 +23,27 @@ shinyServer(function(input, output) {
 
   
   output$contents <- renderTable({
-
-    
+  
     req(input$archivo)
-    
     datos <- archivo_in()
-    
+    head(datos)
   })
   
-  
+  output$summary <- renderPrint({
+    
+    if(is.null(archivo_in()))
+    {
+      return(NULL)   
+    }else{
+      
+      datosTS <- ts(archivo_in(), frequency=12, start=c(1946,1))
+    }
+    
+    
+    
+    #datos <- archivo_in()
+    summary(datosTS)
+  })
   
   
   
@@ -42,36 +52,32 @@ shinyServer(function(input, output) {
  
   
    output$distPlot <- renderPlot({
-     if(input$radio==1){
      
-          
-         if(is.null(archivo_in()))
-            {
-              return(NULL)   
-         }else{
-           
-         
-        births <- scan("http://robjhyndman.com/tsdldata/data/nybirths.dat")
-         birthstimeseries <- ts(archivo_in(), frequency=12, start=c(1946,1))
-        plot(birthstimeseries)
-
-         }
+     
+     if(is.null(archivo_in()))
+     {
+       return(NULL)   
+     }else{
+       
+       datosTS <- ts(archivo_in(), frequency=12, start=c(1946,1))
+      }
+      if(input$radio==1){
+       plot(datosTS)
      }else{
        if(input$radio==2){
-         births <- scan("http://robjhyndman.com/tsdldata/data/nybirths.dat")
-         birthstimeseries <- ts(births, frequency=12, start=c(1946,1))
-         plot(birthstimeseries)
-         birthtimeseriescomponets <- decompose(birthstimeseries)
-         plot(birthtimeseriescomponets)
+         #births <- scan("http://robjhyndman.com/tsdldata/data/nybirths.dat")
+         #birthstimeseries <- ts(births, frequency=12, start=c(1946,1))
+         #plot(birthstimeseries)
+         datosTSdecomp <- decompose(datosTS)
+         plot(datosTSdecomp)
        
        }else{
          if(input$radio==3){
-           #input$action== FALSE
-           births <- scan("http://robjhyndman.com/tsdldata/data/nybirths.dat")
-           birthstimeseries <- ts(births, frequency=12, start=c(1946,1))
-           acf(birthstimeseries)
-           
-         
+           acf(datosTS)
+          }else{
+           if(input$radio==4){
+            pacf(datosTS)
+           }
          }
        }
      }   

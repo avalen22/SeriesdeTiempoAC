@@ -7,18 +7,26 @@
 
 library(shiny)
 
-shinyUI(fluidPage(
-
+shinyUI(
+  
+  #fluidPage(
+  navbarPage("Series de Tiempo y modelado predictivo",
   # Application title
-  titlePanel("Series de Tiempo"),
+  #titlePanel("Series de Tiempo"),
 
-  # Sidebar with a slider input for number of bins
-  sidebarLayout(
+ 
+  #sidebarLayout(
+  tabPanel( "Estadísticos",
+    
     sidebarPanel(
-       fileInput("archivo", label = h3("File input")), 
-       radioButtons("radio", label = h3("Radio buttons"), 
-                    choices = list("Plot" = 1, "Decompose" = 2, "acf" = 3), 
-                                                                    selected = 1)
+       fileInput("archivo", label = h3("Seleccione datos:")), 
+       radioButtons("radio", label = h3("Gráficas"), 
+                    choices = list("Plot" = 1,
+                                   "Decompose" = 2,
+                                   "acf" = 3,
+                                   "pacf" = 4), 
+                    selected = 1),
+       verbatimTextOutput("summary")
     ),
 
     # Show a plot of the generated distribution
@@ -28,9 +36,38 @@ shinyUI(fluidPage(
       plotOutput("distPlot")
       
     )
-  )
+  ), 
   
-  #  , actionButton("action", label = "Action")
+  tabPanel( "Predicciones",
+            
+            sidebarPanel(
+              #lo que habrá en este panel
+            ),
+            
+            # Show a plot of the generated distribution
+            mainPanel(
+              
+              tableOutput("contents1"), 
+              plotOutput("distPlot1")
+              
+            )
+  ),
+  
+  tabPanel( "Ajustes de funciones",
+            sidebarPanel(
+              #lo que habrá en este panel
+            ),
+            
+            # Show a plot of the generated distribution
+            mainPanel(
+              
+              tableOutput("contents2"), 
+              plotOutput("distPlot2")
+              
+            )
+            
+    )
+  
   
   
 ))

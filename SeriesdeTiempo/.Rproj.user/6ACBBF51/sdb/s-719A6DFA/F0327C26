@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "\n# This is the user-interface definition of a Shiny web application.\n# You can find out more about building applications with Shiny here:\n#\n# http://shiny.rstudio.com\n#\n\nlibrary(shiny)\n\nshinyUI(\n  \n  #fluidPage(\n  navbarPage(\"Series de Tiempo y modelado predictivo\",\n  # Application title\n  #titlePanel(\"Series de Tiempo\"),\n\n \n  #sidebarLayout(\n  tabPanel( \"Estadísticos\",\n    \n    sidebarPanel(\n       fileInput(\"archivo\", label = h3(\"Seleccione datos:\")), \n       radioButtons(\"radio\", label = h3(\"Gráficas\"), \n                    choices = list(\"Plot\" = 1,\n                                   \"Decompose\" = 2,\n                                   \"acf\" = 3,\n                                   \"pacf\" = 4), \n                    selected = 1),\n       verbatimTextOutput(\"summary\")\n    ),\n\n    # Show a plot of the generated distribution\n    mainPanel(\n      \n      tableOutput(\"contents\"), \n      plotOutput(\"distPlot\")\n      \n    )\n  ), \n  \n  tabPanel( \"Predicciones\",\n            \n            sidebarPanel(\n              #lo que habrá en este panel\n            ),\n            \n            # Show a plot of the generated distribution\n            mainPanel(\n              \n              tableOutput(\"contents1\"), \n              plotOutput(\"distPlot1\")\n              \n            )\n  ),\n  \n  tabPanel( \"Ajustes de funciones\",\n            sidebarPanel(\n              #lo que habrá en este panel\n            ),\n            \n            # Show a plot of the generated distribution\n            mainPanel(\n              \n              tableOutput(\"contents2\"), \n              plotOutput(\"distPlot2\")\n              \n            )\n            \n    )\n  \n  \n  \n))\n",
+    "created" : 1506466639989.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1647000550",
+    "id" : "F0327C26",
+    "lastKnownWriteTime" : 1506467096,
+    "last_content_update" : 1506467096023,
+    "path" : "~/GitHub/SeriesdeTiempo/SeriesdeTiempo/ui.R",
+    "project_path" : "ui.R",
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
