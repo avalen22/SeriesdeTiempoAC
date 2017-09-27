@@ -56,6 +56,12 @@ shinyUI(
   tabPanel( "Ajustes de funciones",
             sidebarPanel(
               #lo que habrá en este panel
+              radioButtons("radio2", label = h3("Funciones"), 
+                           choices = list("Lineal" = 1,
+                                          "Logaritmica" = 2,
+                                          "exponencial" = 3), 
+                           selected = 1)
+              
             ),
             
             # Show a plot of the generated distribution

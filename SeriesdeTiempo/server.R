@@ -48,9 +48,8 @@ shinyServer(function(input, output) {
   
   
   
-#PINTAR DATOS INICIALMENTE
+#CUERPO DEL PANEL DE ESTADÍSTICOS
  
-  
    output$distPlot <- renderPlot({
      
      
@@ -84,7 +83,41 @@ shinyServer(function(input, output) {
   })
   
   
+ 
+ #CUERPO DEL PANEL DE AJUSTE DE FUNCIONES  
    
+   output$distPlot2 <- renderPlot({
+     
+     
+     if(is.null(archivo_in()))
+     {
+       return(NULL)   
+     }else{
+       
+       datosTS <- ts(archivo_in(), frequency=12, start=c(1946,1))
+     }
+     if(input$radio2==1){
+      
+       t <- seq(1:length(datosTS))                     
+       m <- lm(formula = datosTS ~ t)
+       
+       plot(t,datosTS, type = "l")
+       lines(m$fitted.values, col = "red", lwd = 2)
+       #plot(datosTS)
+     }else{
+       if(input$radio2==2){
+   
+         
+         
+       }else{
+         if(input$radio2==3){
+           
+           
+           
+         }
+       }
+     }   
+   })  
  
   
   
