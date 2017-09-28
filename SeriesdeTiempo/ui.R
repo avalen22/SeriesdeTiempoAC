@@ -21,10 +21,11 @@ shinyUI(
     sidebarPanel(
        fileInput("archivo", label = h3("Seleccione datos:")), 
        radioButtons("radio", label = h3("Gráficas"), 
-                    choices = list("Plot" = 1,
-                                   "Decompose" = 2,
-                                   "acf" = 3,
-                                   "pacf" = 4), 
+                    choices = list("Serie tiempo" = 1,
+                                   "Histograma" = 2,
+                                   "ACF" = 3,
+                                   "pACF" = 4,
+                                   "Descomponer" = 5), 
                     selected = 1),
        verbatimTextOutput("summary")
     ),
@@ -38,41 +39,65 @@ shinyUI(
     )
   ), 
   
+  
+  tabPanel( "Ajustes de funciones",
+               sidebarPanel(
+                 #lo que habrá en este panel
+                 radioButtons("radio2", label = h3("Funciones"), 
+                              choices = list("Lineal" = 1,
+                                             "Cuadrática" = 2,
+                                             "Exponencial" = 3,
+                                             "Logaritmica" = 4), 
+                              selected = 1)
+                 
+               ),
+               
+               # Show a plot of the generated distribution
+               mainPanel(
+                 
+                 tableOutput("contents2"), 
+                 plotOutput("distPlot2")
+                 
+               )
+               
+  ),
+  
+  
+  
   tabPanel( "Predicciones",
             
             sidebarPanel(
-              #lo que habrá en este panel
+              
+              selectInput("prediccion", "Tipos de predicciones:",
+                          choices = list("Serie de tiempo" = 1,
+                                           "Holt-Winters" = 2,
+                                           "ARIMA" = 3)),
+              
+            
+             numericInput("nropreds", "Número de periodos a predecir:", 5, min =1, step = 1),
+             numericInput("intervaloconf", "Intervalo  de confianza de la predicción:",0.9, min =0, max=1, step = 0.01),
+              
+              # Include clarifying text ----
+              helpText("Note: while the data view will show only the specified",
+                       "number of observations, the summary will still be based",
+                       "on the full dataset.")
+              
+             
+            #  actionButton("update", "Update View")
+              
+              
             ),
             
-            # Show a plot of the generated distribution
-            mainPanel(
+           mainPanel(
               
-              tableOutput("contents1"), 
-              plotOutput("distPlot1")
+            
+              plotOutput("distPlot3"),
+              tableOutput("contents3") 
               
             )
-  ),
+  )
   
-  tabPanel( "Ajustes de funciones",
-            sidebarPanel(
-              #lo que habrá en este panel
-              radioButtons("radio2", label = h3("Funciones"), 
-                           choices = list("Lineal" = 1,
-                                          "Logaritmica" = 2,
-                                          "exponencial" = 3), 
-                           selected = 1)
-              
-            ),
-            
-            # Show a plot of the generated distribution
-            mainPanel(
-              
-              tableOutput("contents2"), 
-              plotOutput("distPlot2")
-              
-            )
-            
-    )
+  
   
   
   

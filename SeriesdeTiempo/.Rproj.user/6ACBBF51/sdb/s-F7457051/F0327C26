@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "\n# This is the user-interface definition of a Shiny web application.\n# You can find out more about building applications with Shiny here:\n#\n# http://shiny.rstudio.com\n#\n\nlibrary(shiny)\n\nshinyUI(\n  \n  #fluidPage(\n  navbarPage(\"Series de Tiempo y modelado predictivo\",\n  # Application title\n  #titlePanel(\"Series de Tiempo\"),\n\n \n  #sidebarLayout(\n  tabPanel( \"Estadísticos\",\n    \n    sidebarPanel(\n       fileInput(\"archivo\", label = h3(\"Seleccione datos:\")), \n       radioButtons(\"radio\", label = h3(\"Gráficas\"), \n                    choices = list(\"Serie tiempo\" = 1,\n                                   \"Histograma\" = 2,\n                                   \"ACF\" = 3,\n                                   \"pACF\" = 4,\n                                   \"Descomponer\" = 5), \n                    selected = 1),\n       verbatimTextOutput(\"summary\")\n    ),\n\n    # Show a plot of the generated distribution\n    mainPanel(\n      \n      tableOutput(\"contents\"), \n      plotOutput(\"distPlot\")\n      \n    )\n  ), \n  \n  \n  tabPanel( \"Ajustes de funciones\",\n               sidebarPanel(\n                 #lo que habrá en este panel\n                 radioButtons(\"radio2\", label = h3(\"Funciones\"), \n                              choices = list(\"Lineal\" = 1,\n                                             \"Cuadrática\" = 2,\n                                             \"Exponencial\" = 3,\n                                             \"Logaritmica\" = 4), \n                              selected = 1)\n                 \n               ),\n               \n               # Show a plot of the generated distribution\n               mainPanel(\n                 \n                 tableOutput(\"contents2\"), \n                 plotOutput(\"distPlot2\")\n                 \n               )\n               \n  ),\n  \n  \n  \n  tabPanel( \"Predicciones\",\n            \n            sidebarPanel(\n              \n              selectInput(\"prediccion\", \"Tipos de predicciones:\",\n                          choices = list(\"Serie de tiempo\" = 1,\n                                           \"Holt-Winters\" = 2,\n                                           \"ARIMA\" = 3)),\n              \n            \n             numericInput(\"nropreds\", \"Número de periodos a predecir:\", 5, min =1, step = 1),\n             numericInput(\"intervaloconf\", \"Intervalo  de confianza de la predicción:\",0.9, min =0, max=1, step = 0.01),\n              \n              # Include clarifying text ----\n              helpText(\"Note: while the data view will show only the specified\",\n                       \"number of observations, the summary will still be based\",\n                       \"on the full dataset.\")\n              \n             \n            #  actionButton(\"update\", \"Update View\")\n              \n              \n            ),\n            \n           mainPanel(\n              \n            \n              plotOutput(\"distPlot3\"),\n              tableOutput(\"contents3\") \n              \n            )\n  )\n  \n  \n  \n  \n  \n))\n",
+    "created" : 1506466639989.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "30076474",
+    "id" : "F0327C26",
+    "lastKnownWriteTime" : 1506561508,
+    "last_content_update" : 1506561508150,
+    "path" : "~/GitHub/SeriesdeTiempo/SeriesdeTiempo/ui.R",
+    "project_path" : "ui.R",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
