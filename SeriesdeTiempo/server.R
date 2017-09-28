@@ -17,7 +17,7 @@ shinyServer(function(input, output) {
       return(NULL)
       
     archivo<- input$archivo
-    read.table(file=archivo$datapath, header=FALSE, sep=",", dec="." )
+    data = read.table(file=archivo$datapath, header=TRUE, sep=",", dec="." )
     
   })
 
