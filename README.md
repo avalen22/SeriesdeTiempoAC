@@ -1,3 +1,3 @@
 # SeriesdeTiempo
-#Christian Gomez - Ana María Valencia
+# Christian Gomez - Ana María Valencia
 https://seriesdetiempoac.shinyapps.io/seriesdetiempom/
