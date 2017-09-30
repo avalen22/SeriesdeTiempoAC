@@ -35,9 +35,9 @@ shinyUI(
       tableOutput("summary"),
       br(),
       br(),
-      tableOutput("contents"), 
-      br(),
-      br(),
+      # tableOutput("contents"), 
+      # br(),
+      # br(),
       plotOutput("distPlot")
       
     )
@@ -72,7 +72,7 @@ shinyUI(
             sidebarPanel(
               
               selectInput("prediccion", "Tipos de predicciones:",
-                          choices = list("Serie de tiempo" = 1,
+                          choices = list("Elija modelo:" = 1,
                                            "Holt-Winters" = 2,
                                            "ARIMA" = 3)),
               

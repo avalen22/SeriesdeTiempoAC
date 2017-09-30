@@ -6,6 +6,7 @@
 #
 
 library(shiny)
+library(forecast)
 
 shinyServer(function(input, output) {
 
@@ -109,7 +110,10 @@ shinyServer(function(input, output) {
        datosTS <- ts(archivo_in(), frequency=12, start=c(1946,1))
      }
      
-     
+
+
+
+  
      t <- seq(1:length(datosTS))  
      tt <- t*t
      ttt<-t*t*t
@@ -119,7 +123,7 @@ shinyServer(function(input, output) {
      m.lin <- lm(formula = datosTS ~ t)
      m.cuad <- lm(formula = datosTS ~ t +tt)
      m.cub <- lm(formula = datosTS ~ t + tt + ttt)
-     m.log <- lm(formula = logt ~ t)
+     m.log <- lm(formula = datosTS ~ logt)
 
      if(input$radio2==1){
 
@@ -227,7 +231,7 @@ shinyServer(function(input, output) {
          if(input$prediccion==3){
            #Prediccion ARIMA
            
-         fit= Arima(datosTS, order = c(0,0,1))
+         fit= arima(datosTS, order = c(0,0,1))
          forecast = forecast(fit,h=input$nropreds)
          plot(forecast, col='green')
         lines(fit$fitted, col='red')

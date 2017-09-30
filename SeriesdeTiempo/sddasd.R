@@ -17,3 +17,10 @@ row.names(mseLM) <- c("rsmeLM","smeLM")
 
 rsmeLM = data.frame(sqrt(mseLM))
 errores = rbind(mseLM, rsmeLM)
+
+datosTS
+
+logt <- log(datosTS)
+
+plot(datosTS)
+lines(logt)
