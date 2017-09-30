@@ -44,14 +44,14 @@ shinyUI(
   ), 
   
   
-  tabPanel( "Ajustes de funciones",
+  tabPanel( "Tendencias",
                sidebarPanel(
                  #lo que habrá en este panel
                  radioButtons("radio2", label = h3("Funciones"), 
                               choices = list("Lineal" = 1,
                                              "Cuadrática" = 2,
                                              "Cúbica" = 3,
-                                             "Exponencial" = 4), 
+                                             "Logarítmica" = 4), 
                               selected = 1)
                  
                ),
@@ -67,7 +67,7 @@ shinyUI(
   
   
   
-  tabPanel( "Predicciones",
+  tabPanel( "Modelación y Predicciones",
             
             sidebarPanel(
               
